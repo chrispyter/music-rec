@@ -16,7 +16,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - MIT License file added to project root
 - `README.md` with project overview and setup instructions
 
-## [0.1.1] – 2025-06-14
+## [0.1.2] – 2025-06-14
 ### Added
 - `CHANGELOG.md` to track progress
-
+- Git repository initialization
+- GitHub remote repository setup
+- Initial commit with project files
