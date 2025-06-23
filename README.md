@@ -31,6 +31,6 @@ Follow these steps to set up the project locally.
 - pip install -r requirements.txt
 
 5. Set up the environment variables:
-- SPOTIPY_CLIENT_ID = your_spotify_client_id
-- SPOTIPY_CLIENT_SECRET = your_spotify_client_secret
-- SPOTIPY_REDIRECT_URI = https://127.0.0.1:8888/callback
+- Last_fm_API_Key=09ab43205b0e15eb45b10b15f352c6cc
+- Last_fm_Shared_Secret=bb01c32b8b654dfdbf26469bc8127664
+- Last_fm_Callback_URL=https://127.0.0.1:8888/callback

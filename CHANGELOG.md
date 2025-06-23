@@ -22,3 +22,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Git repository initialization
 - GitHub remote repository setup
 - Initial commit with project files
+
+## [0.1.3] - 2025-06-22
+### Added
+- JSON formatting for better data structure visualization
+- Track ID extraction from Spotify search results
+
+### Changed
+- Improved code readability with json.dumps() for API responses
+
+### Notes
+- Encountered 403 errors with Spotify audio_features endpoint due to recent API restrictions
+- Decided to switch to Last.fm API for music recommendation features
+- Installed pylast library for Last.fm API integration (setup to be completed)
