@@ -27,11 +27,26 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Added
 - JSON formatting for better data structure visualization
 - Track ID extraction from Spotify search results
+- Installed pylast library for Last.fm API integration (setup to be completed)
 
 ### Changed
 - Improved code readability with json.dumps() for API responses
 
-### Notes
-- Encountered 403 errors with Spotify audio_features endpoint due to recent API restrictions
-- Decided to switch to Last.fm API for music recommendation features
-- Installed pylast library for Last.fm API integration (setup to be completed)
+### Deprecated
+- Spotify API integration due to recent API restrictions with Spotify audio_features endpoint
+
+## [0.1.4] - 2025-06-26
+### Added
+- Direct HTTP requests using `requests` library
+- Proper API parameter structure using `params` dictionary
+- Test for `artist.getSimilar` method with the rapper "Future"
+- JSON formatting for readable API responses
+
+### Removed
+- Spotify API dependencies from requirements.txt
+
+### Changed
+- Main.py to use Last.fm API instead of Spotify
+
+### Fixed
+- Environment variable handling for API key

@@ -2,24 +2,21 @@
 import os
 from dotenv import load_dotenv
 import json
+import requests
 
 # Load environment variables from the .env file
 load_dotenv()
 
-# Initialize Spotify API client with OAuth credentials from environment variables
-spotify_api = spotipy.Spotify(auth_manager=SpotifyOAuth(
-    client_id=os.getenv("SPOTIPY_CLIENT_ID"),
-    client_secret=os.getenv("SPOTIPY_CLIENT_SECRET"),
-    redirect_uri=os.getenv("SPOTIPY_REDIRECT_URI"),
-    scope="user-library-read user-read-private user-read-email"
-))
+# Defining API key
+api_key = os.getenv("Last_fm_API_Key")
 
-# Testing a search request
-results = spotify_api.search(q="track:Blinding Lights artist:The Weeknd", type="track", limit=1)
+# Setting up parameters for test call
+params = {'artist': 'Future', 'limit': 5, 'api_key': api_key, 'method': 'artist.getSimilar', 'format': 'json'}
 
-# Getting a track ID for a song
-track_id = results["tracks"]["items"][0]["id"]
-
-# Looking at the audio features of a song
-song_features = spotify_api.audio_features(tracks=[track_id])
-print(song_features)
+# Testing a method call
+request = requests.get("http://ws.audioscrobbler.com/2.0", params=params)
+if request.status_code == 200:
+    data = request.json()
+    print(json.dumps(data, indent=1))
+else:
+    print(f"Error: {request.status_code}")
