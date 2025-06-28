@@ -50,3 +50,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Fixed
 - Environment variable handling for API key
+
+## [0.1.5] - 2025-06-28
+### Added
+- getTopTags method implementation for song tag analysis
+
+### Removed
+- Comments for self-explanatory lines of code
