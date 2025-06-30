@@ -57,3 +57,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Removed
 - Comments for self-explanatory lines of code
+
+## [0.1.6] - 2025-06-29
+### Added
+- Automated retrieval of tags for multiple songs
+- Organization of project tasks in GitHub Projects
+
+### Removed
+- Two planned features from README.md to clarify priorities
