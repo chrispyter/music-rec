@@ -65,3 +65,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Removed
 - Two planned features from README.md to clarify priorities
+
+## [0.1.7] - 2025-07-04
+### Added
+- Function definition (get_track_top_tags) for track.getTopTags method to use in tag.getTopTracks function
