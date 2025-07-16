@@ -46,7 +46,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Spotify API dependencies from requirements.txt
 
 ### Changed
-- Main.py to use Last.fm API instead of Spotify
+- Main.py to use Last.fm API instead of Spotify's API
 
 ### Fixed
 - Environment variable handling for API key
@@ -69,3 +69,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ## [0.1.7] - 2025-07-04
 ### Added
 - Function definition (get_track_top_tags) for track.getTopTags method to use in tag.getTopTracks function
+
+## [0.1.8] - 2025-07-15
+### Added
+- SQL database schema for managing song, tag, and song-tag relationship data (`schema.sql`)
+- Test script (`sql_connection_test.py`) to verify integration of Python and MySQL
