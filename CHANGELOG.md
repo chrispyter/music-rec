@@ -74,3 +74,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Added
 - SQL database schema for managing song, tag, and song-tag relationship data (`schema.sql`)
 - Test script (`sql_connection_test.py`) to verify integration of Python and MySQL
+
+## [0.1.9] - 2025-07-20
+### Added
+- Test folder (`tests`) containing script to test SQL connection (`sql_connection_test.py`)
+- Experimental file (`sandbox.py`) to organize code used to test different API calls
+- Separate file for populating song-tag database in SQL (`populate_db.py`)
