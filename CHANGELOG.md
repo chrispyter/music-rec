@@ -80,3 +80,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Test folder (`tests`) containing script to test SQL connection (`sql_connection_test.py`)
 - Experimental file (`sandbox.py`) to organize code used to test different API calls
 - Separate file for populating song-tag database in SQL (`populate_db.py`)
+
+## [0.1.10] - 2025-07-20
+### Added
+- Script in `populate_db.py` to retrieve 100 songs from popular music genres
