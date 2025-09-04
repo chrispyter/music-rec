@@ -84,3 +84,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ## [0.1.10] - 2025-07-20
 ### Added
 - Script in `populate_db.py` to retrieve 100 songs from popular music genres
+
+## [0.1.11] - 2025-09-03
+### Added
+- Error handling for edge cases when a user inputs a song that is mispelled, not real, or unknown
