@@ -88,3 +88,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ## [0.1.11] - 2025-09-03
 ### Added
 - Error handling for edge cases when a user inputs a song that is mispelled, not real, or unknown
+
+## [0.1.12] - 2025-09-13
+### Added
+- Logic to retrieve and process song name, artist name, and tags for each song using Last.fm API
+
+### Changed
+- Improved database population script to ensure only valid songs with tags are processed
