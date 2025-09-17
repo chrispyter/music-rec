@@ -95,3 +95,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Changed
 - Improved database population script to ensure only valid songs with tags are processed
+
+## [0.1.13] - 2025-09-16
+### Changed
+- Retrieval of tags so only 10 tags are captured from each song
+- Standardization of tag names to lowercase to ensure there aren't duplicate tags
