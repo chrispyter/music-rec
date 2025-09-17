@@ -45,9 +45,20 @@ if request.status_code == 200:
             tags_list = []
             for t in tags:
                 tag = t.get('name')
-                if tag:
+                if tag and len(tags_list) < 10:
+                    tag = tag.lower()
                     tags_list.append(tag)
-                    # OR would i not need a list. could it just add each one iteratively
+                print(f'Song {count}:', song_name, artist_name, tags_list)
+                if not tags_list:
+                    continue
+                    
+
+ # limit number of tags to 10
+
+# figure out how to not add song if there's no tags
+
+# implement count so that exactly 100 songs are added, with extras added to account
+# for songs with no tags
 
 
 # # Connecting to SQL
