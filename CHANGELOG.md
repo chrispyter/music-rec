@@ -100,3 +100,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Changed
 - Retrieval of tags so only 10 tags are captured from each song
 - Standardization of tag names to lowercase to ensure there aren't duplicate tags
+
+## [0.1.14] - 2025-09-17
+### Fixed
+- Loop control logic in populate_db.py to properly process exactly 100 songs per genre
+- Infinite loop issue caused by while loop structure repeating identical API requests
