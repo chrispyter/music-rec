@@ -38,17 +38,20 @@ for genre in popular_genres:
                     continue
                 if request.status_code == 200:
                     data = request.json()
-                    tags = data['toptags']['tag']
-                    tags_list = []
-                    for t in tags:
-                        tag = t.get('name')
-                        if tag and len(tags_list) < 10:
-                            tag = tag.lower()
-                            tags_list.append(tag)
-                    if not tags_list:
-                        continue
-                    count += 1
-                    print(f'Song {count}:', song_name, artist_name, tags_list)
+                    tags = data.get('toptags')
+                    if tags:
+                        tags = tags.get('tag')
+                        tags_list = []
+                        for t in tags:
+                            tag = t.get('name')
+                            if tag and len(tags_list) < 10:
+                                tag = tag.lower()
+                                tags_list.append(tag)
+                        if not tags_list:
+                            continue
+                        count += 1
+                        print(f'Song {count}:', song_name, artist_name, tags_list)
+
 
 
  # limit number of tags to 10
