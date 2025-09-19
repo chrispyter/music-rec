@@ -105,3 +105,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Fixed
 - Loop control logic in populate_db.py to properly process exactly 100 songs per genre
 - Infinite loop issue caused by while loop structure repeating identical API requests
+
+## [0.1.15] - 2025-09-18
+### Fixed
+- KeyError for missing 'toptags' in API responses by adding proper error handling with .get() method
+- Script now successfully processes all 15 genres without crashing
+
+### Added
+- Analysis script in sandbox.py to count songs per genre from test output
