@@ -7,17 +7,9 @@ import sqlite3
 load_dotenv()
 api_key = os.getenv("Last_fm_API_Key")
 
-#  CURRENTLY FIGURING OUT HOW TO CHECK SONG NAME AND ARTIST BEFORE INSERTING INTO DB
-
-# edge cases:
-# - song/artist isn't found (in loop alr)
-# - tags aren't found (in loop alr)
-# - remove duplicates if found (built-in with sql)
-
-# def input_song()
-#     users_song = 
-
-popular_genres = ['pop', 'hip-hop', 'hip hop', 'rap', 'rock', 'r&b', 'r and b', 'latin', 'edm', 'electronic', 'kpop', 'k-pop', 'korean pop', 'country', 'indie']
+# Generating songs and tags from a pre-set list of popular genres to establish a 
+# comprehensive dataset of songs that the algorithm can work off of
+popular_genres = ['pop', 'hip-hop', 'hip hop', 'rap', 'rock', 'r&b', 'r and b', 'latin', 'spanish', 'latino', 'edm', 'electronic', 'kpop', 'k-pop', 'korean pop', 'country', 'bluegrass', 'americana', 'indie']
 for genre in popular_genres:
     count = 0
     params = {'tag': genre, 'limit': 120, 'api_key': api_key, 'method': 'tag.getTopTracks', 'format': 'json'}
@@ -47,34 +39,11 @@ for genre in popular_genres:
                             if tag and len(tags_list) < 10:
                                 tag = tag.lower()
                                 tags_list.append(tag)
-                        if not tags_list:
+                        if not tags_list: 
                             continue
                         count += 1
                         print(f'Song {count}:', song_name, artist_name, tags_list)
 
-
-
- # limit number of tags to 10
-
-# figure out how to not add song if there's no tags
-
-# implement count so that exactly 100 songs are added, with extras added to account
-# for songs with no tags
-
-
 # # Connecting to SQL
 # connection = sqlite3.connect('music_rec_schema')
 # cursor = connection.cursor()
-
-# THIS IS FOR TESTING FUNCTION OUTPUT
-
-# params = {'tag': 'rock', 'limit': 100, 'api_key': api_key, 'method': 'tag.getTopTracks', 'format': 'json'}
-# request = requests.get("http://ws.audioscrobbler.com/2.0", params=params)
-# if request.status_code == 200:
-#     data = request.json()
-#     print(json.dumps(data, indent=1))
-# else:
-#     print(f"Error: {request.status_code}")
-
-# song name = name
-# artist = artist[name]
