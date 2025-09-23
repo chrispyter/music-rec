@@ -40,7 +40,7 @@ api_key = os.getenv("Last_fm_API_Key")
 
 # Checking to see how many songs were output for each genre in my database 
 # population script
-popular_genres = ['pop', 'hip-hop', 'hip hop', 'rap', 'rock', 'r&b', 'r and b', 'latin', 'edm', 'electronic', 'kpop', 'k-pop', 'korean pop', 'country', 'indie']
+popular_genres = ['pop', 'hip-hop', 'hip hop', 'rap', 'rock', 'r&b', 'r and b', 'latin', 'spanish', 'latino', 'edm', 'electronic', 'kpop', 'k-pop', 'korean pop', 'country', 'bluegrass', 'americana', 'indie']
 with open('test.out', 'r') as file:
     first_genre = True
     genre_index = 0
