@@ -113,3 +113,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Added
 - Analysis script in sandbox.py to count songs per genre from test output
+
+## [0.1.16] - 2025-09-23
+### Changed
+- SQL schema to match syntax for SQLite
+
+### Added
+- More genre variations to popular_genres list to widen the variety of songs 
