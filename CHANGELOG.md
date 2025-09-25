@@ -120,3 +120,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Added
 - More genre variations to popular_genres list to widen the variety of songs 
+
+## [0.1.17] - 2025-09-24
+### Added
+- SQLite database file (music_rec_schema) with normalized table structure
+- Complete SQL integration in populate_db.py with parameterized queries
+- Database population script that successfully inserted 910 songs with 1,718 unique tags and 9,075 song-tag relationships
+- UNIQUE constraints to prevent duplicate songs and tags
+
+### Changed
+- Database population from print statements to actual SQL INSERT operations with proper error handling
