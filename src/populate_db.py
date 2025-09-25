@@ -4,8 +4,13 @@ import json
 import requests
 import sqlite3
 
+# Loading API key
 load_dotenv()
 api_key = os.getenv("Last_fm_API_Key")
+
+# Connecting to SQL
+connection = sqlite3.connect('music_rec_schema')
+cursor = connection.cursor()
 
 # Generating songs and tags from a pre-set list of popular genres to establish a 
 # comprehensive dataset of songs that the algorithm can work off of
@@ -42,8 +47,13 @@ for genre in popular_genres:
                         if not tags_list: 
                             continue
                         count += 1
-                        print(f'Song {count}:', song_name, artist_name, tags_list)
-
-# # Connecting to SQL
-# connection = sqlite3.connect('music_rec_schema')
-# cursor = connection.cursor()
+                        cursor.execute("INSERT OR IGNORE INTO songs (song_name, artist) VALUES (?, ?)", (song_name, artist_name,))
+                        cursor.execute("SELECT song_id FROM songs WHERE song_name = ? AND artist = ?", (song_name, artist_name,))
+                        song_id = cursor.fetchone()[0]
+                        for t in tags_list:
+                            cursor.execute("INSERT OR IGNORE INTO tags (tag) VALUES (?)", (t,))
+                            cursor.execute("SELECT tag_id FROM tags WHERE tag = ?", (t,))
+                            tag_id = cursor.fetchone()[0]
+                            cursor.execute("INSERT OR IGNORE INTO song_tags (song_id, tag_id) VALUES (?, ?)", (song_id, tag_id,))
+connection.commit()
+connection.close()
