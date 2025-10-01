@@ -130,3 +130,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Changed
 - Database population from print statements to actual SQL INSERT operations with proper error handling
+
+## [0.1.18] - 2025-09-30
+### Added
+- SQLite database connection in main.py for recommendation algorithm
+- Query to check if user input song exists in database and retrieve song_id
+- Error handling for songs not found in database with fallback message
