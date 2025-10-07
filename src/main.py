@@ -22,15 +22,17 @@ cursor.execute("SELECT song_id FROM songs WHERE song_name = ? AND artist = ?", (
 result = cursor.fetchone()
 if result:
     song_id = result[0]
-    print("Next step")
+    cursor.execute("SELECT tag FROM tags JOIN song_tags ON tags.tag_id = song_tags.tag_id WHERE song_id = ?", (song_id,))
+    tags = cursor.fetchall()
 else:
     print("Song not found in database. Please try another!")
 
-# - check if song is in database
-#     - if it is, grab tags
-#     - if not, usi getTopTags API call to get tags
-# - use SQL queries to find other songs that share tags 
-# - rank recommendations based on number of shared tags 
+# gets tags from input song
+# find songs that share tags
+# either:
+#     - output 5 songs that share the most amount of tags
+#     - score tags by importance rather than just werighing based on number of shared tags
+#     - or use both scoring and number of tags
 
 # edge cases:
 # - no tags are found
