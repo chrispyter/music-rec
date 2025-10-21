@@ -24,6 +24,16 @@ if result:
     song_id = result[0]
     cursor.execute("SELECT tag FROM tags JOIN song_tags ON tags.tag_id = song_tags.tag_id WHERE song_id = ?", (song_id,))
     tags = cursor.fetchall()
+    tag_names = [tag[0] for tag in tags]
+    cursor.execute('''SELECT song_name, artist, COUNT(*) as shared_tag_count FROM songs 
+                    JOIN song_tags ON songs.song_id = song_tags.song_id
+                    JOIN tags ON tags.tag_id = song_tags.tag_id
+                    WHERE tags.tag IN ({}) AND songs.song_id != ?
+                    GROUP BY song_name, artist
+                    ORDER BY shared_tag_count DESC
+                    LIMIT 5'''.format(','.join('?' * len(tag_names))), tag_names + [song_id])
+    sim_tag_songs = cursor.fetchall()
+    print(sim_tag_songs)
 else:
     print("Song not found in database. Please try another!")
 
