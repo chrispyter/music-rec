@@ -140,3 +140,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ## [0.1.19] - 2025-10-6
 ### Added
 - SQL JOIN query to retrieve all tags associated with user's input song
+
+## [0.1.20] - 2025-10-20
+### Added
+- SQL query to output top 5 songs that share the most tags with input song
