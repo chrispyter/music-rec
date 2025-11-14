@@ -144,3 +144,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ## [0.1.20] - 2025-10-20
 ### Added
 - SQL query to output top 5 songs that share the most tags with input song
+
+## [0.1.21] - 2025-11-13
+### Added
+- Return statement for API error handling in `get_top_song_tags()` function for consistency
+- Database lookup to check if input song exists (for exclusion from recommendations)
+- Separate SQL query to handle recommendations when input song is not in database
+
+### Changed
+- Refactored tag retrieval code into reusable `get_top_song_tags()` function
+- Updated schema column from `artist` to `artist_name` for consistency
