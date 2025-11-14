@@ -1,8 +1,8 @@
 CREATE TABLE songs
 (song_name VARCHAR(75) NOT NULL,
-artist VARCHAR(75) NOT NULL,
+artist_name VARCHAR(75) NOT NULL,
 song_id INTEGER PRIMARY KEY AUTOINCREMENT,
-UNIQUE(song_name, artist));
+UNIQUE(song_name, artist_name));
 
 CREATE TABLE tags
 (tag VARCHAR(75) NOT NULL,
