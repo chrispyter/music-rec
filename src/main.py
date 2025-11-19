@@ -15,19 +15,17 @@ connection = sqlite3.connect('music_rec_schema')
 cursor = connection.cursor()
 
 # Gets song name input by user
-song_name = input("Enter any song:")
-artist_name = input("Enter the song's artist:")
+# song_name = input("Enter any song:")
+# artist_name = input("Enter the song's artist:")
 
-# gets tags
-# checks if tags are found in database
-# if so:
-    # look for songs that have at least 5 of input song's tags
-    # if 5 songs aren't found, use the ones that were found and use api for the rest
+# Test values
+song_name = "Runaway"
+artist_name = "Kanye West"
 
 # Function to retrieve input song tags, making it easier to reuse, debug, and
 # improve code as needed
 def get_top_song_tags(song_name, artist_name):
-    params = {'track': song_name, 'artist': artist_name, 'limit': 10, 'api_key': api_key, 'method': 'track.getTopTags'}
+    params = {'track': song_name, 'artist': artist_name, 'limit': 10, 'api_key': api_key, 'method': 'track.getTopTags', 'format': 'json'}
     request = requests.get("http://ws.audioscrobbler.com/2.0", params=params)
     if request.status_code == 200:
         data = request.json()
@@ -44,14 +42,11 @@ def get_top_song_tags(song_name, artist_name):
         print(f"API Request Error: {request.status_code}")
         return None
 
-
+# Algorithm to recommend songs
 input_song_tags = get_top_song_tags(song_name, artist_name)
 if input_song_tags is None:
     exit()
 else:
-    # first check if song is in database so it can be excluded
-    # if it is, exclude it when looking for matching tags
-    # if it's not, proceed with checking matching tags
     song_tags = [tag['name'] for tag in input_song_tags]
     cursor.execute('''SELECT song_id FROM songs 
                     WHERE song_name = ? AND artist_name = ?
@@ -65,30 +60,56 @@ else:
 						JOIN tags ON tags.tag_id = song_tags.tag_id
 						WHERE tags.tag IN ({})
 						GROUP BY song_name, artist_name
-						HAVING shared_tag_count >= 5
+						HAVING shared_tag_count >= 3
 						ORDER BY shared_tag_count DESC
-                        LIMIT 5'''.format(','.join('?' * len(song_tags))), song_tags)
+                        LIMIT 20'''.format(','.join('?' * len(song_tags))), song_tags)
     else:
-        # look and see if these song tags appear in the database, and if they do,
-        # count how many of them show up for every song
         cursor.execute('''SELECT song_name, artist_name, COUNT(*) as shared_tag_count FROM songs 
                         JOIN song_tags ON songs.song_id = song_tags.song_id
                         JOIN tags ON tags.tag_id = song_tags.tag_id
                         WHERE tags.tag IN ({}) AND songs.song_id != ?
                         GROUP BY song_name, artist_name
-                        HAVING shared_tag_count >= 5
+                        HAVING shared_tag_count >= 3
                         ORDER BY shared_tag_count DESC
-                        LIMIT 5'''.format(','.join('?' * len(song_tags))), 
+                        LIMIT 20'''.format(','.join('?' * len(song_tags))), 
                         song_tags + [input_song_id])
-        sim_tag_songs = cursor.fetchall()
-        list_sim_tag_songs = [sim_song[0] for sim_song in sim_tag_songs]
-        if len(list_sim_tag_songs) >= 5:
-            print(sim_tag_songs)
-        else:
-else:
-    print("Song not found in database. Please try another!")
+    sim_tag_songs = cursor.fetchall()
+    list_sim_tag_songs = [sim_song[0] for sim_song in sim_tag_songs]
+    revised_list_sim_tag_songs = []
+    for sim_song in list_sim_tag_songs:
+        count = 0 
+        while count <= 2:
+            if sim_song['artist'] == artist_name:
+                count += 1
+                revised_list_sim_tag_songs.append(sim_song)
+            else:
+                continue
+    
+    
+    # stop when it reaches 3
+
+    # look at every song
+    # once count reaches 3, stop adding songs that have the same artist                                              
 
 
+    # Debug output
+    print(f"Input song in database: {input_song_id is not None}")
+    print(f"Number of tags: {len(song_tags)}")
+    print(f"Tags: {song_tags}")
+    print(f"Number of matching songs: {len(list_sim_tag_songs)}")
+    print(f"Matching songs: {sim_tag_songs}")
+    
+    if len(list_sim_tag_songs) >= 3:
+        print("\nTop 5 recommendations:")
+        print(list_sim_tag_songs)
+    else:
+        print(f"\nOnly found {len(list_sim_tag_songs)} songs with >= 5 shared tags.")
+
+
+# need to figure out how to find songs that are good to test the code on
+
+
+# ALGORITHM IDEA
 # Get input song's weighted tags (1 API call)
 # Get top tracks from top 3 tags (3 API calls)
 # Get tags for each candidate track (many API calls - this is the complex part)
