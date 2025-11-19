@@ -154,3 +154,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Changed
 - Refactored tag retrieval code into reusable `get_top_song_tags()` function
 - Updated schema column from `artist` to `artist_name` for consistency
+
+## [0.1.22] - 2025-11-18
+### Added
+- `output-results.txt` to organize and analyze query outputs
+
+### Changed
+- `populate_db.py` to use `artist_name` column instead of `artist` to match updated schema
+- SQL query LIMIT increased from 5 to 20 to provide more candidates for artist diversity filtering
