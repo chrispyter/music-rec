@@ -47,8 +47,8 @@ for genre in popular_genres:
                         if not tags_list: 
                             continue
                         count += 1
-                        cursor.execute("INSERT OR IGNORE INTO songs (song_name, artist) VALUES (?, ?)", (song_name, artist_name,))
-                        cursor.execute("SELECT song_id FROM songs WHERE song_name = ? AND artist = ?", (song_name, artist_name,))
+                        cursor.execute("INSERT OR IGNORE INTO songs (song_name, artist_name) VALUES (?, ?)", (song_name, artist_name,))
+                        cursor.execute("SELECT song_id FROM songs WHERE song_name = ? AND artist_name = ?", (song_name, artist_name,))
                         song_id = cursor.fetchone()[0]
                         for t in tags_list:
                             cursor.execute("INSERT OR IGNORE INTO tags (tag) VALUES (?)", (t,))
