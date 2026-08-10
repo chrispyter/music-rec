@@ -15,12 +15,8 @@ connection = sqlite3.connect('music_rec_schema')
 cursor = connection.cursor()
 
 # Gets song name input by user
-# song_name = input("Enter any song:")
-# artist_name = input("Enter the song's artist:")
-
-# Test values
-song_name = "Runaway"
-artist_name = "Kanye West"
+song_name = input("Enter a song name: ")
+artist_name = input("Enter the song's artist(s): ")
 
 # Function to retrieve input song tags, making it easier to reuse, debug, and
 # improve code as needed
@@ -74,50 +70,30 @@ else:
                         LIMIT 20'''.format(','.join('?' * len(song_tags))), 
                         song_tags + [input_song_id])
     sim_tag_songs = cursor.fetchall()
-    list_sim_tag_songs = [sim_song[0] for sim_song in sim_tag_songs]
     revised_list_sim_tag_songs = []
-    for sim_song in list_sim_tag_songs:
-        count = 0 
-        while count <= 2:
-            if sim_song['artist'] == artist_name:
-                count += 1
-                revised_list_sim_tag_songs.append(sim_song)
-            else:
-                continue
-    
-    
-    # stop when it reaches 3
+    artist_count = 0
+    for sim_song in sim_tag_songs:
+        recommended_song_name = sim_song[0]
+        recommended_artist_name = sim_song[1]
+        if recommended_artist_name == artist_name:
+            if artist_count < 2:
+                artist_count += 1
+                revised_list_sim_tag_songs.append(recommended_song_name)
+        else:
+            revised_list_sim_tag_songs.append(recommended_song_name)
+        if len(revised_list_sim_tag_songs) == 5:
+            break                                             
 
-    # look at every song
-    # once count reaches 3, stop adding songs that have the same artist                                              
+# Showing the recommendations
+if revised_list_sim_tag_songs:
+    print("\nTop recommendations:")
+    for idx, song in enumerate(revised_list_sim_tag_songs, 1):
+        print(f"{idx}. {song}")
+else:
+    print("\nNo recommendations found matching the criteria.")
 
-
-    # Debug output
-    print(f"Input song in database: {input_song_id is not None}")
-    print(f"Number of tags: {len(song_tags)}")
-    print(f"Tags: {song_tags}")
-    print(f"Number of matching songs: {len(list_sim_tag_songs)}")
-    print(f"Matching songs: {sim_tag_songs}")
-    
-    if len(list_sim_tag_songs) >= 3:
-        print("\nTop 5 recommendations:")
-        print(list_sim_tag_songs)
-    else:
-        print(f"\nOnly found {len(list_sim_tag_songs)} songs with >= 5 shared tags.")
-
-
-# need to figure out how to find songs that are good to test the code on
-
-
-# ALGORITHM IDEA
-# Get input song's weighted tags (1 API call)
-# Get top tracks from top 3 tags (3 API calls)
-# Get tags for each candidate track (many API calls - this is the complex part)
-# Score each track based on tag overlap with weights
-# Rank and return top 5
-
-
-# edge cases:
-# - no tags are found
-# - song or artist is spelled differently
-#     - already have this accounted for, but what about artists who have accents in their names or a mix of capital and lowercase letters, like Beyonce or PnB Rock
+# Debug output
+# print(f"Input song in database: {input_song_id is not None}")
+# print(f"Number of tags: {len(song_tags)}")
+# print(f"Tags: {song_tags}")
+# print(f"Number of matching songs found: {len(sim_tag_songs)}")

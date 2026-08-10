@@ -1,2 +1,6 @@
-/.venv/
+music_rec_schema
+output-results.txt
+test.out
+**/__pycache__/
+.venv/
 .env
